@@ -39,4 +39,16 @@
     }
   }
   
+  .sortSelect {
+    border: none;
+    font-size: 16px;
+  
+    option {
+      color: #1976d2;
+      background-color: transparent;
+      border: none;
+      padding: 4px 8px;
+    }
+  }
+  
   
