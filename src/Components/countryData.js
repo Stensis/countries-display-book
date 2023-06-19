@@ -154,9 +154,19 @@ function countryData() {
       )}
     </div>
   );
-//   defined a function to show empty data views
-function EmptyDataView() {
+  //   defined a function to show empty data views
+  function EmptyDataView() {
     return <div className={Styles.emptyView}>No countries found.</div>;
+  }
+  //   added error view component
+  function ErrorView() {
+    return (
+      <div className={Styles.errorViewContainer}>
+        <p className={Styles.errorView}>
+          Encountered an error while fetching countries.
+        </p>
+      </div>
+    );
   }
 }
 export default countryData;
