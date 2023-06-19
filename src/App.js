@@ -6,7 +6,7 @@ function App() {
     <div
       style={{
         backgroundColor: "whitesmoke",
-        padding: "24px",
+        padding: "16px",
       }}
     >
       <h1 style={{ padding: "10px" }}>Country Book</h1>
