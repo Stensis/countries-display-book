@@ -22,5 +22,12 @@
     display: inline-flex;
     gap: 12px;
   }
+  /* general buttons */
+  .button {
+    border: 1px solid rgb(40, 133, 226);
+    color: #1976d2;
+    background-color: white;
+    height: 40px;
+  }
   
   
