@@ -3,21 +3,21 @@ import { CountryItemView } from "./countryItem";
 import Styles from "./countryData.module.css";
 
 const API_URL = "https://restcountries.com/v2/all";
+
 const ASC = "Asc";
 const DESC = "Desc";
 const FILTER_TYPE_LITHUANIA = "filter-lithuania";
 const FILTER_TYPE_OCEANIA = "filter-oceania";
 
-function countryData() {
-  // setting variables states
+function CountryData() {
   const [countryData, setCountryData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
   const [hasFetchError, setHasFetchError] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
+
   const [sortType, setSortType] = useState(undefined);
   const [filterType, setFilterType] = useState(undefined);
 
-  // fetching the data from  the api server
   useEffect(() => {
     let isMounted = true;
 
@@ -26,6 +26,7 @@ function countryData() {
         const dataArr = await res.json();
         if (isMounted) {
           setIsFetching(false);
+          console.log("dataArr", dataArr);
           setHasFetchError(false);
           setCountryData(dataArr);
           setOriginalData(dataArr);
@@ -42,7 +43,7 @@ function countryData() {
       isMounted = false;
     };
   }, []);
-  // sorting the country data by ascending and descending order
+
   function handleSortData(type) {
     setSortType(type);
     if (type === ASC) {
@@ -69,7 +70,7 @@ function countryData() {
       setCountryData(sorted);
     }
   }
-  //   filtering function to filter countrie in ocenia region and that are small than luthuania
+
   function handleFilterData(type) {
     setFilterType(type);
     if (type === FILTER_TYPE_LITHUANIA) {
@@ -88,15 +89,14 @@ function countryData() {
       setCountryData(filtered);
     }
   }
-  //   reset button function to default
+
   function handleResetData() {
     setSortType(undefined);
     setFilterType(undefined);
     setCountryData(originalData);
   }
-  //   rendering the filted data and sorted data
+  // Use the originalData when sorting or filtering is applied, otherwise use the fetched data
   const renderedData = sortType || filterType ? countryData : originalData;
-
   if (hasFetchError) {
     return <ErrorView />;
   }
@@ -104,7 +104,7 @@ function countryData() {
   if (isFetching) {
     return <LoadingDataView />;
   }
-  // RENDERING DATA
+
   return (
     <div>
       <div className={Styles.buttonContainer}>
@@ -154,27 +154,28 @@ function countryData() {
       )}
     </div>
   );
-  //defined a function to show empty data views
-  function EmptyDataView() {
-    return <div className={Styles.emptyView}>No countries found.</div>;
-  }
-  //added error view component
-  function ErrorView() {
-    return (
-      <div className={Styles.errorViewContainer}>
-        <p className={Styles.errorView}>
-          Encountered an error while fetching countries.
-        </p>
-      </div>
-    );
-  }
-  //added a loading component to show in ui before the data loads
-  function LoadingDataView() {
-    return (
-      <div className={Styles.loadingDataView}>
-        Loading countries... <div className={Styles.loadingIcon}></div>
-      </div>
-    );
-  }
 }
-export default countryData;
+// loads when there is no country found
+function EmptyDataView() {
+  return <div className={Styles.emptyView}>No countries found.</div>;
+}
+// load when there is an error fetching the data
+function ErrorView() {
+  return (
+    <div className={Styles.errorViewContainer}>
+      <p className={Styles.errorView}>
+        Encountered an error while fetching countries.
+      </p>
+    </div>
+  );
+}
+// loads before the data is loaded
+function LoadingDataView() {
+  return (
+    <div className={Styles.loadingDataView}>
+      Loading countries... <div className={Styles.loadingIcon}></div>
+    </div>
+  );
+}
+
+export default CountryData;
