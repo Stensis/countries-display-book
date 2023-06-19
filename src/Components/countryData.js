@@ -154,5 +154,9 @@ function countryData() {
       )}
     </div>
   );
+//   defined a function to show empty data views
+function EmptyDataView() {
+    return <div className={Styles.emptyView}>No countries found.</div>;
+  }
 }
 export default countryData;
