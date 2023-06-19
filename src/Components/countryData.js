@@ -88,5 +88,11 @@ function countryData() {
       setCountryData(filtered);
     }
   }
+  //   reset button function to default
+  function handleResetData() {
+    setSortType(undefined);
+    setFilterType(undefined);
+    setCountryData(originalData);
+  }
 }
 export default countryData;
