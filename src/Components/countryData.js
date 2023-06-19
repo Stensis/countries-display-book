@@ -94,5 +94,65 @@ function countryData() {
     setFilterType(undefined);
     setCountryData(originalData);
   }
+  //   rendering the filted data and sorted data
+  const renderedData = sortType || filterType ? countryData : originalData;
+
+  if (hasFetchError) {
+    return <ErrorView />;
+  }
+
+  if (isFetching) {
+    return <LoadingDataView />;
+  }
+  // RENDERING DATA
+  return (
+    <div>
+      <div className={Styles.buttonContainer}>
+        <div className={Styles.filterButtons}>
+          <button
+            className={Styles.button}
+            onClick={() => handleFilterData(FILTER_TYPE_OCEANIA)}
+          >
+            Filter countries in Oceania
+          </button>
+
+          <button
+            className={Styles.button}
+            onClick={() => handleFilterData(FILTER_TYPE_LITHUANIA)}
+          >
+            Filter countries smaller than Lithuania
+          </button>
+          <button className={Styles.button} onClick={handleResetData}>
+            Reset
+          </button>
+        </div>
+
+        <button className={Styles.button}>
+          Sort by Name:
+          <select
+            value={sortType}
+            onChange={(e) => handleSortData(e.target.value)}
+            className={Styles.sortSelect}
+          >
+            <option value={null}></option>
+            <option value={ASC}>{ASC}</option>
+            <option value={DESC}>{DESC}</option>
+          </select>
+        </button>
+      </div>
+
+      {renderedData.length > 0 ? (
+        <ul className={Styles.ul}>
+          {renderedData.map((country) => (
+            <li className={Styles.li} key={country.name}>
+              <CountryItemView {...country} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <EmptyDataView />
+      )}
+    </div>
+  );
 }
 export default countryData;
