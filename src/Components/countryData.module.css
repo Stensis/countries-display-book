@@ -30,4 +30,13 @@
     height: 40px;
   }
   
+  .button:hover {
+    background-color: rgba(25, 118, 210, 0.04);
+    border: 1px solid rgb(13, 103, 194);
+  
+    > select {
+      background-color: rgba(25, 118, 210, 0.04);
+    }
+  }
+  
   
