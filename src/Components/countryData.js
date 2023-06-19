@@ -10,6 +10,8 @@ function countryData() {
   const [countryData, setCountryData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
   const [hasFetchError, setHasFetchError] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
+  const [sortType, setSortType] = useState(undefined);
 
   useEffect(() => {
     let isMounted = true;
