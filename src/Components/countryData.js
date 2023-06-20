@@ -18,6 +18,9 @@ function CountryData() {
   const [sortType, setSortType] = useState(undefined);
   const [filterType, setFilterType] = useState(undefined);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const pageSize = 20; // Number of countries per page
+
   useEffect(() => {
     let isMounted = true;
 
@@ -47,30 +50,14 @@ function CountryData() {
   function handleSortData(type) {
     setSortType(type);
     if (type === ASC) {
-      const sorted = [...countryData].sort(function (a, b) {
-        if (a.name < b.name) {
-          return -1;
-        }
-        if (a.name > b.name) {
-          return 1;
-        }
-        return 0;
-      });
+      const sorted = [...countryData].sort((a, b) => a.name.localeCompare(b.name));
       setCountryData(sorted);
     } else if (type === DESC) {
-      const sorted = [...countryData].sort(function (a, b) {
-        if (a.name < b.name) {
-          return 1;
-        }
-        if (a.name > b.name) {
-          return -1;
-        }
-        return 0;
-      });
+      const sorted = [...countryData].sort((a, b) => b.name.localeCompare(a.name));
       setCountryData(sorted);
     }
   }
-
+  
   function handleFilterData(type) {
     setFilterType(type);
     if (type === FILTER_TYPE_LITHUANIA) {
@@ -95,8 +82,16 @@ function CountryData() {
     setFilterType(undefined);
     setCountryData(originalData);
   }
-  // Use the originalData when sorting or filtering is applied, otherwise use the fetched data
+
   const renderedData = sortType || filterType ? countryData : originalData;
+  const startIndex = currentPage * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedData = renderedData.slice(startIndex, endIndex);
+
+  function handlePageChange(pageIndex) {
+    setCurrentPage(pageIndex);
+  }
+
   if (hasFetchError) {
     return <ErrorView />;
   }
@@ -141,9 +136,10 @@ function CountryData() {
         </button>
       </div>
 
-      {renderedData.length > 0 ? (
+     
+      {paginatedData.length > 0 ? (
         <ul className={Styles.ul}>
-          {renderedData.map((country) => (
+          {paginatedData.map((country) => (
             <li className={Styles.li} key={country.name}>
               <CountryItemView {...country} />
             </li>
@@ -152,13 +148,33 @@ function CountryData() {
       ) : (
         <EmptyDataView />
       )}
+
+       {/* Pagination */}
+       <div className={Styles.buttonPageContainer}>
+        {Array.from({ length: Math.ceil(renderedData.length / pageSize) }).map(
+          (_item, index) => (
+            <button
+              key={index}
+              className={`${Styles.buttonPage} ${
+                currentPage === index ? Styles.activeButton : ""
+              }`}
+              onClick={() => handlePageChange(index)}
+            >
+              {index + 1}
+            </button>
+          )
+        )}
+      </div>
+
     </div>
   );
 }
+
 // loads when there is no country found
 function EmptyDataView() {
   return <div className={Styles.emptyView}>No countries found.</div>;
 }
+
 // load when there is an error fetching the data
 function ErrorView() {
   return (
@@ -169,6 +185,7 @@ function ErrorView() {
     </div>
   );
 }
+
 // loads before the data is loaded
 function LoadingDataView() {
   return (

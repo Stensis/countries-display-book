@@ -42,8 +42,6 @@ The project consists of the following components:
 ## Styling
 The application is styled using CSS modules. The styles are organized in separate CSS files for each component, namely countryData.module.css and countryItem.module.css.
 
-## Credits
-The project is developed by Irene Njuguna. You can find the code on GitHub.
 
 
 

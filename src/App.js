@@ -5,11 +5,10 @@ function App() {
   return (
     <div
       style={{
-        backgroundColor: "whitesmoke",
-        padding: "16px",
+        backgroundColor: "whitesmok",
       }}
     >
-      <h1 style={{ padding: "10px" }}>Country Book</h1>
+      <h1>Country Book</h1>
       <CountryData />
     </div>
   );
