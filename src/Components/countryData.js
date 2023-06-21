@@ -141,13 +141,15 @@ function CountryData() {
       </div>
 
       {paginatedData.length > 0 ? (
-        <ul className={Styles.ul}>
-          {paginatedData.map((country) => (
-            <li className={Styles.li} key={country.name}>
-              <CountryItemView {...country} />
-            </li>
-          ))}
-        </ul>
+        <div >
+          <ul className={Styles.ul}>
+            {paginatedData.map((country) => (
+              <li className={Styles.li} key={country.name}>
+                <CountryItemView  className={Styles.itemCard} {...country} />
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : (
         <EmptyDataView />
       )}
