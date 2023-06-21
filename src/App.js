@@ -1,13 +1,9 @@
 import React from "react";
-import CountryData from "./Components/countryData";
+import CountryData from "./Components/CountryData";
 
 function App() {
   return (
-    <div
-      style={{
-        backgroundColor: "whitesmok",
-      }}
-    >
+    <div style={{ height: "100vh" }}>
       <h1>Country Book</h1>
       <CountryData />
     </div>
