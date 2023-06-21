@@ -50,14 +50,18 @@ function CountryData() {
   function handleSortData(type) {
     setSortType(type);
     if (type === ASC) {
-      const sorted = [...countryData].sort((a, b) => a.name.localeCompare(b.name));
+      const sorted = [...countryData].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
       setCountryData(sorted);
     } else if (type === DESC) {
-      const sorted = [...countryData].sort((a, b) => b.name.localeCompare(a.name));
+      const sorted = [...countryData].sort((a, b) =>
+        b.name.localeCompare(a.name)
+      );
       setCountryData(sorted);
     }
   }
-  
+
   function handleFilterData(type) {
     setFilterType(type);
     if (type === FILTER_TYPE_LITHUANIA) {
@@ -136,7 +140,6 @@ function CountryData() {
         </button>
       </div>
 
-     
       {paginatedData.length > 0 ? (
         <ul className={Styles.ul}>
           {paginatedData.map((country) => (
@@ -149,8 +152,8 @@ function CountryData() {
         <EmptyDataView />
       )}
 
-       {/* Pagination */}
-       <div className={Styles.buttonPageContainer}>
+      {/* Pagination */}
+      <div className={Styles.buttonPageContainer}>
         {Array.from({ length: Math.ceil(renderedData.length / pageSize) }).map(
           (_item, index) => (
             <button
@@ -165,7 +168,6 @@ function CountryData() {
           )
         )}
       </div>
-
     </div>
   );
 }
