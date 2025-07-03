@@ -9,39 +9,29 @@ import {
 
 export function TopBarButtons({ onSort, onFilter, onReset, selectedSortType }) {
   return (
-    <>
-      <div className={Styles.filterButtons}>
-        <Button onClick={() => onFilter(FILTER_TYPE_OCEANIA)}>
-          Filter countries in Oceania
-        </Button>
-
-        <Button onClick={() => onFilter(FILTER_TYPE_LITHUANIA)}>
-          Filter countries smaller than Lithuania
-        </Button>
-
-        <Button onClick={onReset}>Reset</Button>
-      </div>
-
-      <Button>
-        Sort by Name:
+    <div className={Styles.topBarRow}>
+      <button onClick={() => onFilter(FILTER_TYPE_OCEANIA)} className={Styles.button}>
+        🌊 Oceania
+      </button>
+      <button onClick={() => onFilter(FILTER_TYPE_LITHUANIA)} className={Styles.button}>
+        📏 <small>Smaller than Lithuania</small>
+      </button>
+      <button onClick={onReset} className={Styles.button}>
+        🔄 Reset
+      </button>
+      <div className={Styles.sortContainer}>
+        <label htmlFor="sort" className={Styles.sortLabel}>Sort:</label>
         <select
-          value={selectedSortType}
+          id="sort"
+          value={selectedSortType || ""}
           onChange={(e) => onSort(e.target.value)}
-          className={Styles.sortSelect}
+          className={Styles.select}
         >
-          <option value={null}></option>
-          <option value={ASC}>{ASC}</option>
-          <option value={DESC}>{DESC}</option>
+          <option value="">--</option>
+          <option value={ASC}>A → Z</option>
+          <option value={DESC}>Z → A</option>
         </select>
-      </Button>
-    </>
-  );
-}
-
-function Button({ children, ...props }) {
-  return (
-    <button {...props} className={Styles.button} type="button">
-      {children}
-    </button>
+      </div>
+    </div>
   );
 }

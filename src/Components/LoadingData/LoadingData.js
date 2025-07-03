@@ -5,7 +5,7 @@ export function LoadingData() {
   return (
     <div className={Styles.loadingData}>
       <div className={Styles.loadingIcon}></div>
-      Loading countries...
+      <p className={Styles.loadingText}>Loading countries...</p>
     </div>
   );
 }

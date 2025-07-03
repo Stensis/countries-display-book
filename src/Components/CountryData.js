@@ -13,8 +13,8 @@ import {
   FILTER_TYPE_OCEANIA,
 } from "./TopBarButtons/Constants";
 
-const API_URL = "https://restcountries.com/v2/all";
-const PAGE_SIZE = 20;  
+const API_URL = "https://restcountries.com/v2/all?fields=name,alpha2Code,flags";
+const PAGE_SIZE = 20;
 
 function CountryData() {
   const [countryData, setCountryData] = useState([]);
@@ -27,7 +27,6 @@ function CountryData() {
 
   const [currentPage, setCurrentPage] = useState(0);
 
-
   useEffect(() => {
     let isMounted = true;
 
@@ -35,8 +34,8 @@ function CountryData() {
       .then(async (res) => {
         const dataArr = await res.json();
         if (isMounted) {
-          setIsFetching(false); 
-          setHasFetchError(false); 
+          setIsFetching(false);
+          setHasFetchError(false);
           setCountryData(dataArr);
           setOriginalData(dataArr);
         }
@@ -93,7 +92,8 @@ function CountryData() {
     setCountryData(originalData);
   }
 
-  const renderedData = sortType || filterType ? countryData : originalData;
+  const dataSource = sortType || filterType ? countryData : originalData;
+  const renderedData = Array.isArray(dataSource) ? dataSource : [];
   const startIndex = currentPage * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
   const paginatedData = renderedData.slice(startIndex, endIndex);
@@ -113,12 +113,14 @@ function CountryData() {
   return (
     <div>
       <div className={Styles.buttonContainer}>
-      {paginatedData.length > 0 ? <TopBarButtons
-          onSort={handleSortData}
-          onReset={handleResetData}
-          onFilter={handleFilterData}
-          selectedSortType={sortType}
-        /> : null}
+        {paginatedData.length > 0 ? (
+          <TopBarButtons
+            onSort={handleSortData}
+            onReset={handleResetData}
+            onFilter={handleFilterData}
+            selectedSortType={sortType}
+          />
+        ) : null}
       </div>
 
       {paginatedData.length > 0 ? (

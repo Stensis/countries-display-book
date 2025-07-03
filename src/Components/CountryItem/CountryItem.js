@@ -13,56 +13,56 @@ export function CountryItem({
 }) {
   return (
     <div className={Styles.countryItem}>
-      <div>
-        {flags ? (
-          <img
-            className={Styles.flag}
-            src={flags.png}
-            alt={`flag of ${name}`}
-          />
-        ) : null}
-        <h3>{name}</h3>
+      <div className={Styles.header}>
+        {flags?.png && (
+          <img className={Styles.flag} src={flags.png} alt={`Flag of ${name}`} />
+        )}
+        <h3 className={Styles.name}>{name}</h3>
       </div>
 
-      {callingCodes && callingCodes.length > 0 ? (
-        <div className={Styles.row}>
-          Country calling code(s):{" "}
-          <span className={Styles.rowSpan}>{callingCodes.join(",")}</span>
-        </div>
-      ) : null}
+      <div className={Styles.details}>
+        {callingCodes?.length > 0 && (
+          <div className={Styles.row}>
+            📞 <strong>Calling Code:</strong>{" "}
+            <span className={Styles.value}>{callingCodes.join(", ")}</span>
+          </div>
+        )}
 
-      {region ? (
-        <div className={Styles.row}>
-          Country region: <span className={Styles.rowSpan}>{region}</span>
-        </div>
-      ) : null}
+        {region && (
+          <div className={Styles.row}>
+            🌍 <strong>Region:</strong>{" "}
+            <span className={Styles.value}>{region}</span>
+          </div>
+        )}
 
-      {subregion ? (
-        <div className={Styles.row}>
-          Country sub-region:{" "}
-          <span className={Styles.rowSpan}>{subregion}</span>
-        </div>
-      ) : null}
+        {subregion && (
+          <div className={Styles.row}>
+            🧭 <strong>Sub-region:</strong>{" "}
+            <span className={Styles.value}>{subregion}</span>
+          </div>
+        )}
 
-      {population ? (
-        <div className={Styles.row}>
-          Population:
-          <span className={Styles.rowSpan}>{population.toLocaleString()}</span>
-        </div>
-      ) : null}
+        {population && (
+          <div className={Styles.row}>
+            👥 <strong>Population:</strong>{" "}
+            <span className={Styles.value}>{population.toLocaleString()}</span>
+          </div>
+        )}
 
-      {area ? (
-        <div className={Styles.row}>
-          Area: <span className={Styles.rowSpan}>{area.toLocaleString()}</span>
-        </div>
-      ) : null}
+        {area && (
+          <div className={Styles.row}>
+            📐 <strong>Area:</strong>{" "}
+            <span className={Styles.value}>{area.toLocaleString()} km²</span>
+          </div>
+        )}
 
-      {timezones && timezones.length > 0 ? (
-        <div className={Styles.row}>
-          Timezone(s):{" "}
-          <span className={Styles.rowSpan}>{timezones.join(",")}</span>
-        </div>
-      ) : null}
+        {timezones?.length > 0 && (
+          <div className={Styles.row}>
+            ⏰ <strong>Timezones:</strong>{" "}
+            <span className={Styles.value}>{timezones.join(", ")}</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

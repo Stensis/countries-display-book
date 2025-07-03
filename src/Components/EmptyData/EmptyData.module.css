@@ -1,12 +1,28 @@
 .emptyView {
-  margin: 0;
-  padding: 0;
-  background-color: whitesmoke;
+  background-color: #f0f4f8;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 75vh;
   text-align: center;
   color: #333;
-  font-size: 36px;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.emoji {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.message {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.sub {
+  font-size: 16px;
+  color: #666;
 }

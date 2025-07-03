@@ -1,20 +1,35 @@
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
 .buttonPage {
-  border: 1px solid #1976d2;
-  border-radius: 20px;
-  color: transparent transparent;
+  border: 2px solid #64b5f6;
+  border-radius: 12px;
   background-color: white;
-  height: 40px;
+  color: #1976d2;
+  font-weight: 500;
   padding: 8px 16px;
-  font-size: 14px;
+  font-size: 16px;
+  min-width: 40px;
   cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(25, 118, 210, 0.1);
 }
 
 .buttonPage:hover {
-  background-color: rgba(1, 1, 2, 0.04);
-  border-color: rgb(13, 103, 194);
+  background-color: #e3f2fd;
+  border-color: #1976d2;
+  color: #0d47a1;
 }
 
-.buttonPage.activeButton {
-  background-color: rgba(16, 22, 5, 0.04);
+.activeButton {
+  background-color: #1976d2;
+  color: white;
+  border-color: #1976d2;
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(25, 118, 210, 0.3);
 }
